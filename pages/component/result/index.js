@@ -16,7 +16,7 @@ function Result() {
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row justify-content-center p-4 gap-4">
                 {product.text.map((p)=>{
-                    return( <Avatar label={p.letter} className="mr-2" size="xlarge" style={{ backgroundColor: p.status === 'S' ? "green" : p.status === 'Y' ? "orange" :  "#2196F3", color: "#ffffff" }}/>)
+                    return( <Avatar key={p.id} label={p.letter} className="mr-2" size="xlarge" style={{ backgroundColor: p.status === 'S' ? "green" : p.status === 'Y' ? "orange" :  "#2196F3", color: "#ffffff" }}/>)
                 })}
                
                        
