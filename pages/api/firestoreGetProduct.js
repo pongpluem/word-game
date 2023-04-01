@@ -17,12 +17,11 @@ export default async function handler(req, res) {
     const result = [];
     const querySnapshot = await getDocs(collection(db, "word"));
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      //console.log(doc.id, " => ", doc.data());
+      
       result.push(doc.data());
     });
 
-    console.log(result);
+    //console.log(result);
 
     res.status(200).json(result);
   } catch (e) {
