@@ -20,5 +20,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 //const db = getFirestore(app);
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { app };
 
