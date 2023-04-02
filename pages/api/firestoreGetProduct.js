@@ -1,4 +1,4 @@
-import app from "../../firebase/config"
+import app from "../../firebase/config";
 import {
   getFirestore,
   doc,
@@ -17,7 +17,6 @@ export default async function handler(req, res) {
     const result = [];
     const querySnapshot = await getDocs(collection(db, "word"));
     querySnapshot.forEach((doc) => {
-      
       result.push(doc.data());
     });
 

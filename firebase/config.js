@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { getFirestore } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps} from "firebase/app";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
@@ -14,12 +14,17 @@ const firebaseConfig = {
   measurementId: "G-NHGV7MNBWS",
 };
 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+//const app = !getApps().length ? initializeApp(firebaseConfig) : getApps();
+
+console.log(getApps().length)
 
 // Initialize Cloud Firestore and get a reference to the service
 //const db = getFirestore(app);
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { app };
+export { app };
 

@@ -1,26 +1,28 @@
-import app from "../../firebase/config"
+import app from "../../firebase/config";
 
-import { getFirestore, setDoc, doc, getDocs, collection} from 'firebase/firestore';
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 
 const db = getFirestore(app);
 
-
 export default async function handler(req, res) {
+  try {
+    const result = [];
+    const querySnapshot = await getDocs(collection(db, "word"));
 
-    try {
-        const result = [];
-        const querySnapshot = await getDocs(collection(db, "word"));
-        
-        querySnapshot.forEach((doc) => {
-          
-          result.push(doc.data());
-        });
-    
-        //console.log(result);
-    
-        res.status(200).json(result);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-   
+    querySnapshot.forEach((doc) => {
+      result.push(doc.data());
+    });
+
+    //console.log(result);
+
+    res.status(200).json(result);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }
