@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ProductService } from '../../pages/service/ProductService';
+import { ProductService } from '../../service/ProductService';
 import { DataView } from 'primereact/dataview';
 import { Avatar } from "primereact/avatar";
 

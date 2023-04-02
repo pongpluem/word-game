@@ -1,4 +1,4 @@
-import app from "../firebase/config"
+import app from "../../firebase/config"
 import { getFirestore, doc, query, where, getDocs, setDoc } from "firebase/firestore";
 
 // Initialize Cloud Firestore and get a reference to the service
