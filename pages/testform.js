@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Toast } from 'primereact/toast';
 import { InputText } from "primereact/inputtext";
-import Result from './component/result'
+import Result from '../component/result'
 
 export default function HookFormDoc() {
     const toast = useRef(null);
