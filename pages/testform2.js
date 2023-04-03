@@ -8,6 +8,9 @@ import Result from "../component/result";
 import { v4 as uuidv4 } from "uuid";
 
 export default function HookFormDoc() {
+
+  const answer = "test"
+
   const toast = useRef(null);
 
   const [results, setResults] = useState([]);
@@ -33,16 +36,22 @@ export default function HookFormDoc() {
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
+    // validate input 
     data.value && show();
-    //console.log(data)
+
     const textvalue = [];
 
-    //console.log(data.value)
+    // Convert String to Array
     const avalue = Array.from(data.value);
-    //console.log(avalue)
 
+    // Conver to Array
     avalue.forEach((v) => {
-      textvalue.push({
+      console.log(v)
+      if(v==='t'){
+        //answer
+      }
+
+      textvalue.push({        
         id: uuidv4(),
         letter: v,
         status: "N",

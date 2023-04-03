@@ -3,7 +3,7 @@ export const ProductService = {
         return [                  
             {
                 id: '1028',               
-                message: 'aaaa',               
+                message: 'abcd',               
                 text: [
                     {
                         id: '1028-0',
@@ -12,18 +12,18 @@ export const ProductService = {
                     },
                     {
                         id: '1028-1',
-                        letter: 'a',                        
+                        letter: 'b',                        
                         status: 'N'
                     },
                     {
                         id: '1028-2',
-                        letter: 'a',                        
-                        status: 'N'
+                        letter: 'c',                        
+                        status: 'Y'
                     },
                     {
                         id: '1028-3',
-                        letter: 'a',                        
-                        status: 'N'
+                        letter: 'd',                        
+                        status: 'S'
                     }
                 ]
             },
