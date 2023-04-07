@@ -1,24 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "primereact/button";
 import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
-import Result from "../component/result";
+import WordleResult from "@/component/wordleResult";
 import { v4 as uuidv4 } from "uuid";
 
-export default function HookFormDoc() {
+import { fetchPost } from "@/service/fetchService";
 
-  const answer = "test"
+export default function HookFormDoc() {
+  const answer = useRef("");
 
   const toast = useRef(null);
+  const gameId = useRef("");
 
-  const [results, setResults] = useState([]);
+  //"vyM11o8L5tfWck89THkr"
+  //const [gameId, setGameId] = useState("vyM11o8L5tfWck89THkr");
+  const [game, setGame] = useState({});  
 
-  const show = () => {
+  useEffect(() => {
+    if (gameId.current) {
+      console.log("current : "+gameId.current)
+      const url = "./api/getResult";
+      const req = {
+        id: gameId.current,
+      };
+
+      fetchPost(url, req).then((data) => {
+        setGame(data);
+        gameId.current = data.id
+      });
+      
+    } else {
+      console.log("new Game"+gameId.current)
+      const url = "./api/newGame";
+      const req = {
+        id: gameId.current,
+      };
+
+      fetchPost(url, req).then((data) => {
+        setGame(data);
+        gameId.current = data.id;
+        console.log("new current : "+ data.id)
+        console.log("new current : "+gameId.current)
+      });
+    }
+  }, []);
+
+  const show = (header, msg) => {
     toast.current.show({
       severity: "success",
-      summary: "Form Submitted",
+      summary: header,
+      detail: msg + " " + getValues("value"),
+    });
+  };
+
+  const showError = () => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error Submitted",
       detail: getValues("value"),
     });
   };
@@ -36,61 +77,26 @@ export default function HookFormDoc() {
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
-    // validate input 
-    data.value && show();
+    // validate input
+    answer.current = data.value
 
-    const textvalue = [];
+    console.log(data.value.length)
+    console.log(game.length)
+    if(data.value.length != game.length){
+      showError();
+      return
+    }
 
-    // Convert String to Array
-    const avalue = Array.from(data.value);
-
-    // Conver to Array
-    avalue.forEach((v) => {
-      console.log(v)
-      if(v==='t'){
-        //answer
-      }
-
-      textvalue.push({        
-        id: uuidv4(),
-        letter: v,
-        status: "N",
-      });
-    });
-
-    console.log("before");
-    console.log(results);
-
-    const update = results;
-
-    update.push({
-      id: uuidv4(),
-      message: data.value,
-      text: textvalue,
-    });
-
-    setResults(update);
-
-    console.log("after");
-    console.log(results);
-    
-    /*
-    const url = "./api/addFirestore";
-    
-    const customHeaders = {
-      "Content-Type": "application/json",
+    const url = "./api/addWord";
+    const req = {
+      id: gameId.current,
+      ans: data.value,
+      quest: game.quest
     };
+    fetchPost(url, req).then((res) => {});
 
-    fetch(url, {
-      method: "POST",
-      headers: customHeaders,
-      body: JSON.stringify(update),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-    */
+    show("Save","Success!");
+
     reset();
   };
 
@@ -104,7 +110,9 @@ export default function HookFormDoc() {
 
   return (
     <div>
-      <Result></Result>
+      <h1>{game.quest}</h1>
+      <h1>{game.length}</h1>
+      <WordleResult id={gameId.current} ans={answer.current}></WordleResult>
       <div className="card flex justify-content-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
