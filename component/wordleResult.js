@@ -23,6 +23,8 @@ function WordleResult(props) {
       setGame(data);
       if (data.answer) {
         setAnswer(
+
+          //Sort
           data.answer.sort((a, b) => {
             if (a.createDate < b.createDate) {
               return 1;

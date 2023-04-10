@@ -34,25 +34,7 @@ export default async function handler(req, res) {
 
     // Quest
     const gameRefText = collection(db, "wordgame", id.toString(), "answer");
-
-    /* text in collection
-    const resAns = await addDoc(gameRefText, {             
-        ans: ans,
-        status: "N",
-        createDate: Timestamp.now()
-      });
-
-    const digitRefText = collection(db, "wordgame", id.toString(), "answer", resAns.id, "text");
-              
-    for(let i=0; i<texts.length; i++){
-        await addDoc(digitRefText, {      
-            seq: i,
-            letter: texts[i],
-            status: "N",
-          }); 
-    }
-    */
-
+   
     const digit = [];
     for (let i = 0; i < texts.length; i++) {
       let status = "N";

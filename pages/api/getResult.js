@@ -18,6 +18,7 @@ export default async function handler(req, res) {
   try {
     const id = req.body.id;    
 
+    // Collection & Id
     const gameRef = doc(db, "wordgame", id.toString());
     if (gameRef != undefined) {
       const gameSnap = await getDoc(gameRef);
